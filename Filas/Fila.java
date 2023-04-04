@@ -1,16 +1,17 @@
-public class Fila {
-    private No refNoEntradaFila;
+public class Fila<T> {
+    private No<T> refNoEntradaFila;
 
     public Fila() {
         this.refNoEntradaFila = null; //instancio a fila vazia
     } 
     
-    public void enqueue(No novoNo){
+    public void enqueue(T object){ //refatorado para receber um objeto
+        No novoNo = new No(object);
         novoNo.setRefNo(refNoEntradaFila);
         refNoEntradaFila = novoNo;
     }
 
-    public No first(){  //retorna o primeiro elemento da fila sem remover
+    public T first(){  //retorna o primeiro elemento da fila sem remover
         if(!this.isEmpty()){
             No primeirNo = refNoEntradaFila; //auxiliar
             while(true){
@@ -20,12 +21,12 @@ public class Fila {
                     break;
                 }
             }
-            return primeirNo;
+            return (T) primeirNo.getObject();
         }
         return null;
     }
 
-    public No dequeue(){ //retorna o primeiro elemento da fila removendo-o
+    public T dequeue(){ //retorna o primeiro elemento da fila removendo-o
         if(!this.isEmpty()){
             No primeirNo = refNoEntradaFila;
             No noAuxiliar = refNoEntradaFila; //auxiliar
@@ -38,7 +39,7 @@ public class Fila {
                     break;
                 }
             }
-            return primeirNo;
+            return (T) primeirNo.getObject();
         }
         return null;
     }
